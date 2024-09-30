@@ -1,0 +1,234 @@
+.hero17-header78 {
+  gap: var(--dl-space-space-threeunits);
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.hero17-column {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: var(--dl-space-space-unit);
+}
+.hero17-content1 {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  flex-direction: column;
+}
+.hero17-actions {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: flex-start;
+  padding-top: var(--dl-space-space-unit);
+}
+.hero17-content2 {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.hero17-row-container1 {
+  width: 100%;
+}
+.hero17-placeholder-image10 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image11 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image12 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image13 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image14 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image15 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image16 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image17 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image18 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image19 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image20 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image21 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-row-container2 {
+  width: 100%;
+}
+.hero17-placeholder-image22 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image23 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image24 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image25 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image26 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image27 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image28 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image29 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image30 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image31 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image32 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-placeholder-image33 {
+  width: 400px;
+  height: 400px;
+}
+.hero17-container2 {
+  display: contents;
+}
+.hero17-text5 {
+  display: inline-block;
+}
+.hero17-text6 {
+  display: inline-block;
+}
+.hero17-content1 .hero17-text7 {
+  display: inline-block;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: bounce 3s infinite alternate, glow 1.5s infinite alternate;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+  }
+}
+.hero17-text8 {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateY(20px) rotate(3deg);
+  animation: fadeInScaleRotate 1.2s forwards;
+  transition: color 0.3s ease;
+  color: var(--dl-space-space-oneandhalfunits);
+}
+
+@keyframes fadeInScaleRotate {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotate(3deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(10px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero17-text8:hover {
+  color: var(--dl-color-theme-accent2);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width: 767px) {
+  .hero17-content2 {
+    width: 100%;
+  }
+}
+@media(max-width: 479px) {
+  .hero17-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  .hero17-button1 {
+    width: 100%;
+  }
+  .hero17-button2 {
+    width: 100%;
+  }
+}

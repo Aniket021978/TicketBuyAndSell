@@ -1,0 +1,28 @@
+.footer4-footer7 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  border-top: 2px solid var(--dl-color-theme-primary1);
+}
+
+.footer4-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.footer4-footer7 span {
+  margin-top: 20px; 
+  font-size: 14px;
+  color: var(--dl-color-theme-primary1);
+  font-weight: 600;
+}

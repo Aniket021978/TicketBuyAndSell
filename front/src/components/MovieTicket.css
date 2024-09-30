@@ -1,0 +1,288 @@
+.wrapper {
+  background-color: #f0f4ff; 
+  padding: 90px 0px; 
+  background: linear-gradient(135deg, var(--dl-color-theme-primary2) 10%, var(--dl-color-theme-accent1) 90%);
+}
+
+main {
+  max-width: 600px;
+  margin: auto;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.head {
+  text-align: center;
+  color: white;
+  animation: slideIn 0.5s ease-in-out;
+  margin-bottom: 20px;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ticket-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  animation: formGroupFadeIn 0.6s ease-in-out forwards;
+}
+
+@keyframes formGroupFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+label {
+  font-weight: bold;
+  animation: labelFadeIn 0.5s ease-in-out;
+}
+
+@keyframes labelFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  animation: inputFocus 0.3s ease;
+}
+textarea{
+  height: 50px;
+  border-radius: 10px;
+}
+@keyframes inputFocus {
+  from { transform: scale(1); }
+  to { transform: scale(1.02); }
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  animation: buttonFadeIn 0.5s ease-in-out;
+}
+
+@keyframes buttonFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.choose-file-button {
+  background-color: #e7e7e7;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.choose-file-button:hover {
+  background-color: #d4d4d4;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.selected-file-name {
+  margin-top: 5px;
+  font-style: italic;
+  color: #555;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 80px 0; 
+  }
+
+  main {
+    padding: 15px; 
+  }
+
+  .head {
+    font-size: 24px; 
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 14px; 
+  }
+
+  button {
+    padding: 10px; 
+    font-size: 14px; 
+  }
+
+  .choose-file-button {
+    padding: 10px; 
+    font-size: 14px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    background-color: #e0e7ff; 
+    padding: 60px 0; 
+    height: 120vh;
+    width: 115%;
+  }
+
+  .head {
+    font-size: 20px; 
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 12px; 
+  }
+
+  button {
+    padding: 8px; 
+    font-size: 12px; 
+  }
+
+  .choose-file-button {
+    padding: 8px; 
+    font-size: 12px; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    padding: 140px 0; 
+  }
+
+  main {
+    padding: 30px; 
+  }
+
+  .head {
+    font-size: 28px; 
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 18px; 
+  }
+
+  button {
+    padding: 14px; 
+    font-size: 16px; 
+  }
+
+  .choose-file-button {
+    padding: 14px; 
+    font-size: 16px; 
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    padding: 20px 0; 
+  }
+
+  main {
+    padding: 40px; 
+  }
+
+  .head {
+    font-size: 32px; 
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 20px; 
+  }
+
+  button {
+    padding: 16px; 
+    font-size: 18px; 
+  }
+
+  .choose-file-button {
+    padding: 16px; 
+    font-size: 18px; 
+  }
+}
+
+@media (min-width: 2560px) {
+  .wrapper {
+    padding: 60px 0; 
+  }
+
+  main {
+    padding: 50px; 
+  }
+
+  .head {
+    font-size: 36px; 
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 22px; 
+  }
+
+  button {
+    padding: 18px; 
+    font-size: 20px; 
+  }
+
+  .choose-file-button {
+    padding: 18px; 
+    font-size: 20px; 
+  }
+}
