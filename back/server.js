@@ -11,12 +11,13 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-app.use(cors({
-  origin: "https://ticket-buy-and-sell-front.vercel.app",  // Replace with your frontend URL
-  methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
-  credentials: true,
-  allowedHeaders: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-}));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 app.use(express.json());
 
