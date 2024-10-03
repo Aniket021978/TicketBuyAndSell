@@ -51,7 +51,7 @@ const UserTickets = () => {
       <Link to="/" className="home-button">Home</Link>
       <div className="ticket-list">
         {tickets.length === 0 ? (
-          <p className="no-tickets-message">No tickets available for this user.</p>
+          <p className="no-tickets-message">You Have Not Yet Sell Any Ticket.</p>
         ) : (
           tickets.map(ticket => (
             <div key={ticket._id} className="ticket-card">

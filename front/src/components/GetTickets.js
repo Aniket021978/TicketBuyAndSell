@@ -19,7 +19,7 @@ const GetTickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch("https://ticket-buy-and-sell-back.vercel.app/tickets");
+        const response = await fetch("http://localhost:5000/tickets");
         if (!response.ok) throw new Error("Failed to fetch tickets");
         const data = await response.json();
         setTickets(data);
