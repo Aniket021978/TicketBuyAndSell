@@ -54,7 +54,7 @@ const MovieTicket = () => {
     formData.append('userId', userId);
 
     try {
-      const response = await fetch('https://ticket-buy-and-sell-back.vercel.app/tickets', {
+      const response = await fetch('http://localhost:5000/tickets', {
         method: 'POST',
         body: formData,
       });

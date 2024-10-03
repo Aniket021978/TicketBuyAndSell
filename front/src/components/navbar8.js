@@ -92,12 +92,12 @@ const Navbar8 = (props) => {
       setLoading(true);
 
       const verifyEmailResponse = await axios.post(
-        `https://ticket-buy-and-sell-back.vercel.app/verify-email`,
+        `http://localhost:5000/verify-email`,
         { email }
       );
       if (verifyEmailResponse.data.isRegistered) {
         const sendOtpResponse = await axios.post(
-          `https://ticket-buy-and-sell-back.vercel.app/send-otp`,
+          `http://localhost:5000/send-otp`,
           { email }
         );
         if (sendOtpResponse.data.success) {
@@ -126,7 +126,7 @@ const Navbar8 = (props) => {
 
   const handleVerifyOtp = async (email, enteredOtp) => {
     try {
-      const response = await axios.post("https://ticket-buy-and-sell-back.vercel.app/verify-otp", {
+      const response = await axios.post("http://localhost:5000/verify-otp", {
         email,
         otp: enteredOtp,
       });
@@ -148,7 +148,7 @@ const Navbar8 = (props) => {
   const handleResetPassword = async (email, newPassword) => {
     try {
       const response = await axios.post(
-        "https://ticket-buy-and-sell-back.vercel.app/reset-password",
+        "http://localhost:5000/reset-password",
         {
           email,
           newPassword,
@@ -195,14 +195,14 @@ const Navbar8 = (props) => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("https://ticket-buy-and-sell-back.vercel.app/login", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include",
       });
+
       const data = await response.json();
       console.log("Login Response Data:", data);
 
@@ -229,7 +229,7 @@ const Navbar8 = (props) => {
   const checkUsernameAvailability = async (username) => {
     try {
       const response = await fetch(
-        `https://ticket-buy-and-sell-back.vercel.app/check-username?username=${username}`
+        `http://localhost:5000/check-username?username=${username}`
       );
       const data = await response.json();
 
@@ -259,7 +259,7 @@ const Navbar8 = (props) => {
     }
 
     try {
-      const response = await fetch("https://ticket-buy-and-sell-back.vercel.app/register", {
+      const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

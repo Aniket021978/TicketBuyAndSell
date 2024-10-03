@@ -11,14 +11,13 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
-});
-
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/TickTrade", {
@@ -148,8 +147,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "Your_Email",
-    pass: "Your_Password",
+    user: "aniket021978@gmail.com",
+    pass: "fqqclbomdkgllvgp",
   },
 });
 
@@ -184,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickTrade" <Your_Email>',
+      from: '"TickTrade" <aniket021978@gmail.com>',
       to: email,
       subject: "Your OTP Code",
       html: `

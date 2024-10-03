@@ -11,7 +11,7 @@ const UserTickets = () => {
 
   const fetchUserTickets = async () => {
     try {
-      const response = await fetch(`https://ticket-buy-and-sell-back.vercel.app/tickets/user/${userId}`);
+      const response = await fetch(`http://localhost:5000/tickets/user/${userId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch tickets');
       }
