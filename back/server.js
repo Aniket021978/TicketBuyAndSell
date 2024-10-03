@@ -11,19 +11,12 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Or set a specific origin if required
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-
-  // Intercepts OPTIONS method to respond with allowed headers
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
+app.use(cors({
+  origin: "https://ticket-buy-and-sell-front.vercel.app",  // Replace with your frontend URL
+  methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
+  credentials: true,
+  allowedHeaders: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+}));
 
 app.use(express.json());
 
