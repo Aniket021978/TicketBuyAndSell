@@ -201,8 +201,8 @@ const Navbar8 = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include",
       });
-
       const data = await response.json();
       console.log("Login Response Data:", data);
 
