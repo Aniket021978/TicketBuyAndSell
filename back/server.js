@@ -147,8 +147,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "aniket021978@gmail.com",
-    pass: "fqqclbomdkgllvgp",
+    user: "Your_Email",
+    pass: "Your_Password",
   },
 });
 
@@ -183,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickTrade" <aniket021978@gmail.com>',
+      from: '"TickTrade" Your_Email',
       to: email,
       subject: "Your OTP Code",
       html: `
@@ -409,7 +409,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,  
-    to: 'aniket021978@gmail.com',  
+    to: 'Your_Email',  
     replyTo: email,  
     subject: `New Contact Form Message from ${name}`,
     html: `
