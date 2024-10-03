@@ -11,15 +11,22 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-app.use(
-  cors({
-    origin: "https://ticket-buy-and-sell-front.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type","Authorization"],
-    credentials: true,
-  })
-);
-app.options('*', cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app'); // Allow the frontend's origin
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allowed HTTP methods
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allowed headers
+  res.setHeader('Access-Control-Allow-Credentials', true); // Allow credentials (if needed)
+  next();
+});
+
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.sendStatus(204); // Send a success response with no content
+});
+
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/TickTrade", {
