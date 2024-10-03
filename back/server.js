@@ -13,7 +13,7 @@ const fs = require("fs");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://ticket-buy-and-sell-front.vercel.app",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
@@ -283,6 +283,8 @@ const TicketSchema = new mongoose.Schema({
   availability: { type: String, required: true },
   location: { type: String, required: true },
   image: { type: String, required: true },
+  phone: { type: String, required: true }, 
+  address: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
@@ -304,7 +306,7 @@ const upload = multer({ storage });
 app.use("/images", express.static(path.join(__dirname, "uploads")));
 
 app.post("/tickets", upload.single("image"), async (req, res) => {
-  const { title, description, price, availability, location, userId } =
+  const { title, description, price, availability, location, phone, address, userId } =
     req.body;
   console.log("Received data:", {
     title,
@@ -312,6 +314,8 @@ app.post("/tickets", upload.single("image"), async (req, res) => {
     price,
     availability,
     location,
+    phone,  
+    address,
     userId,
   });
   if (!req.file) {
@@ -328,6 +332,8 @@ app.post("/tickets", upload.single("image"), async (req, res) => {
       availability,
       location,
       image,
+      phone,  
+      address,
       userId,
     });
     await newTicket.save();
@@ -353,6 +359,8 @@ app.get("/tickets", async (req, res) => {
       price: ticket.price,
       availability: ticket.availability,
       location: ticket.location,
+      phone: ticket.phone,
+      address: ticket.address,
     }));
 
     res.status(200).json(formattedTickets);
@@ -383,6 +391,8 @@ app.get("/tickets/user/:userId", async (req, res) => {
         price: ticket.price,
         availability: ticket.availability,
         location: ticket.location,
+        phone: ticket.phone,
+        address: ticket.address,
         status: isExpired ? "expired" : "active",
       };
     });

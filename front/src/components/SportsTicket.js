@@ -8,6 +8,8 @@ const SportsTicket = () => {
   const [availability, setAvailability] = useState('');
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [ticketSaved, setTicketSaved] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -23,6 +25,13 @@ const SportsTicket = () => {
     }
   };
 
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) {
+      setPhone(value);
+    }
+  };
+
   const handleLocationChange = (e) => {
     const value = e.target.value;
     if (/^[a-zA-Z].*/.test(value) || value === '') {
@@ -34,16 +43,18 @@ const SportsTicket = () => {
     e.preventDefault();
     const formData = new FormData();
     const userId = localStorage.getItem('userId');
-    formData.append('title', 'Sports'); // Set the title to 'Sports' directly
+    formData.append('title', 'Movie');
     formData.append('description', description);
     formData.append('price', price);
     formData.append('availability', availability);
     formData.append('location', location);
     formData.append('image', image);
+    formData.append('phone', phone);
+    formData.append('address', address);
     formData.append('userId', userId);
 
     try {
-      const response = await fetch('http://localhost:5000/tickets', {
+      const response = await fetch('https://ticket-buy-and-sell-back.vercel.app/tickets', {
         method: 'POST',
         body: formData,
       });
@@ -65,67 +76,93 @@ const SportsTicket = () => {
     return (
       <SuccessMessage
         ticket={{
-          title: 'Sports',
+          title: 'Movie',
           description,
           price,
           availability,
           location,
           image: image ? URL.createObjectURL(image) : '',
+          phone,
+          address,
         }}
       />
     );
   }
 
   return (
-    <div className="wrapper">
-      <main>
-        <h1 className='head'>Sell Your Sports Ticket</h1>
-        <form className="ticket-form" onSubmit={handleSubmit} encType="multipart/form-data">
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <div className="form-group">
-            <label htmlFor="category">Title:</label>
+    <div className="wrapper1">
+      <main className="ticket-box1">
+        <h1 className='head1'>Sell Your Sports Ticket</h1>
+        <form className="ticket-form1" onSubmit={handleSubmit} encType="multipart/form-data">
+          {errorMessage && <p className="error-message1">{errorMessage}</p>}
+          <div className="form-group1">
+            <label htmlFor="category" className="label1">Title:</label>
             <input
               type="text"
               id="category"
-              value="Sports" // Fixed value for category
+              value="Sports"
               readOnly
-              style={{ backgroundColor: '#f0f0f0', border: '1px solid #ccc', cursor: 'not-allowed' }} // Gray background
+              className="input-readonly1"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="description">Description:</label>
-            <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+          <div className="form-group1">
+            <label htmlFor="description" className="label1">Description:</label>
+            <textarea id="description" className="textarea1" value={description} onChange={(e) => setDescription(e.target.value)} required />
           </div>
-          <div className="form-group">
-            <label htmlFor="price">Price:</label>
-            <input type="number" id="price" value={price} onChange={(e) => setPrice(e.target.value)} required min="0" />
+          <div className="form-group1">
+            <label htmlFor="price" className="label1">Price:</label>
+            <input type="number" id="price" className="input-number1" value={price} onChange={(e) => setPrice(e.target.value)} required min="0" />
           </div>
-          <div className="form-group">
-            <label htmlFor="availability">Availability:</label>
+          <div className="form-group1 avail">
+            <label htmlFor="availability" className="label1">Availability:</label>
             <input
               type="number"
               id="availability"
+              className="input-number1"
               value={availability}
               onChange={(e) => setAvailability(e.target.value)}
               required
               min="0"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="location">Location:</label>
+          <div className="form-group1 loc">
+            <label htmlFor="location" className="label1">Location:</label>
             <input
               type="text"
               id="location"
+              className="input-text1"
               value={location}
               onChange={handleLocationChange}
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="image">Upload Image:</label>
-            <input type="file" id="image" accept="image/*" onChange={handleImageChange} required />
+          <div className="form-group1 phone">
+            <label htmlFor="phone" className="label1">Enter Correct Phone Number So That Buyer Contact you:</label>
+            <input
+              type="text"
+              id="phone"
+              className="input-text1"
+              value={phone}
+              onChange={handlePhoneChange}
+              required
+              maxLength="10"
+            />
           </div>
-          <button type="submit">Submit Ticket</button>
+          <div className="form-group1 full">
+            <label htmlFor="address" className="label1">Enter Correct Full Address So That Buyer Contact you:</label>
+            <textarea
+              id="address"
+              className="textarea1"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group1">
+            <label htmlFor="image" className="label1">Upload Image:</label>
+            <input type="file" id="image" accept="image/*" className="input-file1" onChange={handleImageChange} required />
+          </div>
+          <button type="submit" className="button1">Submit Ticket</button>
         </form>
       </main>
     </div>

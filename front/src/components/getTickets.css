@@ -7,6 +7,7 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   animation: fadeIn 1s ease-in-out;
+  height: 100vh;
 }
 
 .get-tickets-container h2 {
@@ -209,6 +210,12 @@
   margin-bottom: 5px;
 }
 
+.buttons-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+
 .filter-button {
   background-color: #4a90e2;
   color: white;
@@ -217,8 +224,24 @@
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  margin-right: 10px; 
+  height: 41px;
+  width: 90px;
+  margin-top: 90px;
 }
+
+.home-button-get {
+  width: 90px;
+  height: 41px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #4a90e2;
+  color: white;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
 
 .filter-button:hover {
   background-color: #357ABD;
@@ -228,13 +251,14 @@
   outline: none;
 }
 
-.home-button-get {
-  width: 90px;
-  height: 41px;
-  text-align: center;
-  padding: 10px;
-  margin-left: 10px;
+.home-button-get:hover {
+  background-color: #357ABD;
 }
+
+.home-button-get:focus {
+  outline: none;
+}
+
 
 .backdrop {
   position: fixed;
@@ -354,6 +378,12 @@
 }
 
 @media (max-width: 768px) {
+  .get-tickets-container{
+    height: auto;
+  }
+  .para{
+    height: 100vh;
+  }
   .filter-popup {
     width: 300px;
     padding: 30px;
@@ -397,4 +427,36 @@
     position: relative;
     bottom: 90px;
   }
+}
+.para{
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+.back-button {
+  display: inline-block;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+.back-button:active {
+  transform: translateY(0);
+}
+
+.back-button-icon {
+  margin-right: 8px;
 }

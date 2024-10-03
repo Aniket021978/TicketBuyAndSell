@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import './Contact.css';
 
 const Contact = () => {
@@ -57,19 +57,19 @@ const Contact = () => {
 
   return (
     <div className='contact-page'>
-      <h2 className="contact-heading">Contact Us</h2>
-
+      <Link to="/" className="home-button">Home</Link>
       {isLoading && (
         <div className="loading-overlay">
           <div className="loading-spinner"></div>
         </div>
       )}
+      <h2 className="contact-heading">Contact Us</h2>
       {!successMessage ? ( 
       <form className={`contact-form ${isLoading ? 'blurred' : ''}`} onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label" htmlFor="name">Name:</label>
+        <div className="form-group2">
+          <label className="form-label2" htmlFor="name">Name:</label>
           <input
-            className="form-input"
+            className="form-input2"
             type="text"
             id="name"
             value={name}
@@ -77,10 +77,10 @@ const Contact = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label className="form-label" htmlFor="email">Email:</label>
+        <div className="form-group2">
+          <label className="form-label2" htmlFor="email">Email:</label>
           <input
-            className="form-input"
+            className="form-input2"
             type="email"
             id="email"
             value={email}
@@ -88,10 +88,10 @@ const Contact = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label className="form-label" htmlFor="message">Message:</label>
+        <div className="form-group2">
+          <label className="form-label2" htmlFor="message">Message:</label>
           <textarea
-            className="form-input"
+            className="form-input2"
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}

@@ -14,16 +14,8 @@ const Steps2 = (props) => {
               Discover the Power of Our Products
             </h2>
             <p className="thq-body-large">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-              libero vitae erat.
+            Experience a world of opportunities with our diverse range of products. Whether you're looking for unforgettable concert experiences, thrilling movies, or exclusive events, we have something for everyone!
             </p>
-            <div className="steps2-actions">
-              <button className="thq-button-animated thq-button-filled steps2-button">
-                <span className="thq-body-small">Main action</span>
-              </button>
-            </div>
           </div>
           <div className="steps2-container3">
             <div className="steps2-container4 thq-card">

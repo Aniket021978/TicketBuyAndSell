@@ -92,12 +92,12 @@ const Navbar8 = (props) => {
       setLoading(true);
 
       const verifyEmailResponse = await axios.post(
-        `http://localhost:5000/verify-email`,
+        `https://ticket-buy-and-sell-back.vercel.app/verify-email`,
         { email }
       );
       if (verifyEmailResponse.data.isRegistered) {
         const sendOtpResponse = await axios.post(
-          `http://localhost:5000/send-otp`,
+          `https://ticket-buy-and-sell-back.vercel.app/send-otp`,
           { email }
         );
         if (sendOtpResponse.data.success) {
@@ -126,7 +126,7 @@ const Navbar8 = (props) => {
 
   const handleVerifyOtp = async (email, enteredOtp) => {
     try {
-      const response = await axios.post("http://localhost:5000/verify-otp", {
+      const response = await axios.post("https://ticket-buy-and-sell-back.vercel.app/verify-otp", {
         email,
         otp: enteredOtp,
       });
@@ -148,7 +148,7 @@ const Navbar8 = (props) => {
   const handleResetPassword = async (email, newPassword) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/reset-password",
+        "https://ticket-buy-and-sell-back.vercel.app/reset-password",
         {
           email,
           newPassword,
@@ -195,7 +195,7 @@ const Navbar8 = (props) => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("https://ticket-buy-and-sell-back.vercel.app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -229,7 +229,7 @@ const Navbar8 = (props) => {
   const checkUsernameAvailability = async (username) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/check-username?username=${username}`
+        `https://ticket-buy-and-sell-back.vercel.app/check-username?username=${username}`
       );
       const data = await response.json();
 
@@ -259,7 +259,7 @@ const Navbar8 = (props) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("https://ticket-buy-and-sell-back.vercel.app/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -282,7 +282,7 @@ const Navbar8 = (props) => {
         setMessageType("error");
       }
     } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      setMessage("An error occurred. Please try again.",error);
       setMessageType("error");
     }
   };
@@ -790,7 +790,7 @@ const Navbar8 = (props) => {
                     setPendingScroll(true);
                     setIsModalOpen(true);
                   }
-                  setIsMenuOpen(false);
+                  //setIsMenuOpen(false);
                 }}
                 ref={ctaRef}
               >
@@ -977,316 +977,305 @@ const Navbar8 = (props) => {
             </nav>
 
             <div className="navbar8-buttons2">
-              {loading ? null : (
-                <>
-                  {isLoggedIn ? (
-                    <div className="user-info">
-                      {console.log("Username:", username)}
-                      <div className="icon-container">
-                        <FontAwesomeIcon
-                          icon={faUser}
-                          size="1.5x"
-                          color="black"
-                          className="icon-padding"
-                        />
-                        <span className="username">{username}</span>
-                      </div>
-                      <button
-                        onClick={handleLogout}
-                        className="navbar8-action11 thq-button-animated thq-button-filled"
-                      >
-                        Logout
-                      </button>
+            {loading ? null : (
+              <>
+                {isLoggedIn ? (
+                  <div className="user-info">
+                    {console.log("Username:", username)}
+                    <div className="icon-container">
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        size="1.5x"
+                        color="black"
+                        className="icon-padding"
+                      />
+                      <span className="username">{username}</span>
                     </div>
+                    <button
+                      onClick={handleLogout}
+                      className="navbar8-action11 thq-button-animated thq-button-filled"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      className="navbar8-action11 thq-button-animated thq-button-filled"
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setIsSignupModal(false);
+                        setForgotPassword(false);
+                        setMessage("");
+                      }}
+                    >
+                      <span className="thq-body-small">Login</span>
+                    </button>
+                    <button
+                      className="navbar8-action21 thq-button-outline thq-button-animated"
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setIsSignupModal(true);
+                        setForgotPassword(false);
+                        setMessage("");
+                      }}
+                    >
+                      <span className="thq-body-small">Sign Up</span>
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+
+          {isModalOpen && (
+            <div className={`modal-fullscreen ${isModalOpen ? "active" : ""}`}>
+              <div className="modal-content">
+                <button className="close" onClick={() => setIsModalOpen(false)}>
+                  &times;
+                </button>
+                <h2>
+                  {forgotPassword
+                    ? "Forgot Password"
+                    : isSignupModal
+                    ? "Sign Up"
+                    : "Login"}
+                </h2>
+
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const email = e.target.email?.value;
+
+                    if (forgotPassword && !isOtpSent) {
+                      setLoading(true);
+                      setEmail(email);
+                      await handleGetOtp(email);
+                      setLoading(false);
+                    } else if (forgotPassword && isOtpSent && !isOtpVerified) {
+                      const enteredOtp = otp.join("");
+                      if (enteredOtp.length < 6) {
+                        setMessage("Please enter the complete OTP.");
+                        return;
+                      }
+                      const isVerified = await handleVerifyOtp(
+                        email,
+                        enteredOtp
+                      );
+
+                      if (isVerified) {
+                        setIsOtpVerified(true);
+                        setTimerActive(false);
+                      } else {
+                        setIsOtpSent(true);
+                        setOtp(Array(6).fill(""));
+                        setMessage("Invalid OTP. Please try again.");
+                      }
+                    } else if (forgotPassword && isOtpVerified) {
+                      const newPassword = e.target.password.value;
+                      const confirmPassword = e.target.confirmPassword.value;
+
+                      if (newPassword !== confirmPassword) {
+                        setMessage("Passwords do not match. Please try again.");
+                        return;
+                      }
+
+                      await handleResetPassword(email, newPassword);
+                    } else {
+                      const password = e.target.password?.value;
+
+                      if (isSignupModal) {
+                        const username = e.target.username?.value;
+                        handleSignup(username, email, password);
+                      } else {
+                        handleLogin(email, password);
+                      }
+                    }
+                  }}
+                >
+                  {loading && (
+                    <div className="loading-overlay">
+                      <div className="loading-spinner"></div>
+                    </div>
+                  )}
+
+                  {forgotPassword ? (
+                    <>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        disabled={isOtpSent}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+
+                      {!isOtpSent && <button type="submit">Get OTP</button>}
+
+                      {isOtpSent && !isOtpVerified && (
+                        <>
+                          <div className="otp-input-container">
+                            {Array.from({ length: 6 }).map((_, index) => (
+                              <input
+                                key={index}
+                                type="text"
+                                className="otp-input"
+                                value={otp[index] || ""}
+                                onChange={(e) =>
+                                  handleOtpChange(index, e.target.value)
+                                }
+                                maxLength="1"
+                                id={`otp-${index}`}
+                                required
+                              />
+                            ))}
+                          </div>
+                          <div style={{ margin: "10px 0" }}>
+                            Time Remaining: {otpTimer} seconds
+                          </div>
+                          <button type="submit">Verify OTP</button>
+                        </>
+                      )}
+
+                      {isOtpVerified && (
+                        <>
+                          <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter new password"
+                            required
+                          />
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirm new password"
+                            required
+                          />
+                          <button type="submit">Reset Password</button>
+                        </>
+                      )}
+                    </>
                   ) : (
                     <>
-                      <button
-                        className="navbar8-action11 thq-button-animated thq-button-filled"
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          setIsSignupModal(false);
-                          setForgotPassword(false);
-                          setMessage("");
-                        }}
-                      >
-                        <span className="thq-body-small">Login</span>
-                      </button>
-                      <button
-                        className="navbar8-action21 thq-button-outline thq-button-animated"
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          setIsSignupModal(true);
-                          setForgotPassword(false);
-                          setMessage("");
-                        }}
-                      >
-                        <span className="thq-body-small">Sign Up</span>
+                      {isSignupModal && (
+                        <input
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                          required
+                        />
+                      )}
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                      />
+                      <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                      />
+
+                      {!isSignupModal && (
+                        <button
+                          type="button"
+                          className="forgot-password"
+                          onClick={() => {
+                            setForgotPassword(true);
+                            setIsSignupModal(false);
+                            setMessage("");
+                            handleForgotPassword();
+                          }}
+                          style={{
+                            marginBottom: "20px",
+                            marginLeft: "130px",
+                            cursor: "pointer",
+                            color: "#007BFF",
+                            backgroundColor: "transparent",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            transition: "background-color 0.3s, color 0.3s",
+                            textDecoration: "none",
+                          }}
+                        >
+                          Forgot Password?
+                        </button>
+                      )}
+
+                      <button type="submit">
+                        {isSignupModal ? "Register" : "Login"}
                       </button>
                     </>
                   )}
-                </>
-              )}
-            </div>
+                </form>
 
-            {isModalOpen && (
-              <div
-                className={`modal-fullscreen ${isModalOpen ? "active" : ""}`}
-              >
-                <div className="modal-content">
-                  <button
-                    className="close"
-                    onClick={() => setIsModalOpen(false)}
-                  >
-                    &times;
-                  </button>
-                  <h2>
-                    {forgotPassword
-                      ? "Forgot Password"
-                      : isSignupModal
-                      ? "Sign Up"
-                      : "Login"}
-                  </h2>
+                {!isSignupModal && !forgotPassword && (
+                  <p style={{ marginTop: "15px" }}>
+                    Don't have an account?{" "}
+                    <span
+                      className="signup-link"
+                      onClick={() => {
+                        setIsSignupModal(true);
+                        setForgotPassword(false);
+                        setMessage("");
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "#007BFF",
+                        backgroundColor: "transparent",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        transition: "background-color 0.3s, color 0.3s",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Sign Up
+                    </span>
+                  </p>
+                )}
 
-                  <form
-                    onSubmit={async (e) => {
-                      e.preventDefault();
-                      const email = e.target.email?.value;
+                {isSignupModal && !forgotPassword && (
+                  <p style={{ marginTop: "15px" }}>
+                    Already have an account?{" "}
+                    <span
+                      className="signup-link"
+                      onClick={() => {
+                        setIsSignupModal(false);
+                        setForgotPassword(false);
+                        setMessage("");
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "#007BFF",
+                        backgroundColor: "transparent",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        transition: "background-color 0.3s, color 0.3s",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Login
+                    </span>
+                  </p>
+                )}
 
-                      if (forgotPassword && !isOtpSent) {
-                        setLoading(true);
-                        setEmail(email);
-                        await handleGetOtp(email);
-                        setLoading(false);
-                      } else if (
-                        forgotPassword &&
-                        isOtpSent &&
-                        !isOtpVerified
-                      ) {
-                        const enteredOtp = otp.join("");
-                        if (enteredOtp.length < 6) {
-                          setMessage("Please enter the complete OTP.");
-                          return;
-                        }
-                        const isVerified = await handleVerifyOtp(
-                          email,
-                          enteredOtp
-                        );
-
-                        if (isVerified) {
-                          setIsOtpVerified(true);
-                          setTimerActive(false);
-                        } else {
-                          setIsOtpSent(true);
-                          setOtp(Array(6).fill(""));
-                          setMessage("Invalid OTP. Please try again.");
-                        }
-                      } else if (forgotPassword && isOtpVerified) {
-                        const newPassword = e.target.password.value;
-                        const confirmPassword = e.target.confirmPassword.value;
-
-                        if (newPassword !== confirmPassword) {
-                          setMessage(
-                            "Passwords do not match. Please try again."
-                          );
-                          return;
-                        }
-
-                        await handleResetPassword(email, newPassword);
-                      } else {
-                        const password = e.target.password?.value;
-
-                        if (isSignupModal) {
-                          const username = e.target.username?.value;
-                          handleSignup(username, email, password);
-                        } else {
-                          handleLogin(email, password);
-                        }
-                      }
-                    }}
-                  >
-                    {loading && (
-                      <div className="loading-overlay">
-                        <div className="loading-spinner"></div>
-                      </div>
-                    )}
-
-                    {forgotPassword ? (
-                      <>
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="Enter your email"
-                          required
-                          disabled={isOtpSent}
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-
-                        {!isOtpSent && <button type="submit">Get OTP</button>}
-
-                        {isOtpSent && !isOtpVerified && (
-                          <>
-                            <div className="otp-input-container">
-                              {Array.from({ length: 6 }).map((_, index) => (
-                                <input
-                                  key={index}
-                                  type="text"
-                                  className="otp-input"
-                                  value={otp[index] || ""}
-                                  onChange={(e) =>
-                                    handleOtpChange(index, e.target.value)
-                                  }
-                                  maxLength="1"
-                                  id={`otp-${index}`}
-                                  required
-                                />
-                              ))}
-                            </div>
-                            <div style={{ margin: "10px 0" }}>
-                              Time Remaining: {otpTimer} seconds
-                            </div>
-                            <button type="submit">Verify OTP</button>
-                          </>
-                        )}
-
-                        {isOtpVerified && (
-                          <>
-                            <input
-                              type="password"
-                              name="password"
-                              placeholder="Enter new password"
-                              required
-                            />
-                            <input
-                              type="password"
-                              name="confirmPassword"
-                              placeholder="Confirm new password"
-                              required
-                            />
-                            <button type="submit">Reset Password</button>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {isSignupModal && (
-                          <input
-                            type="text"
-                            name="username"
-                            placeholder="Username"
-                            required
-                          />
-                        )}
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                          required
-                        />
-                        <input
-                          type="password"
-                          name="password"
-                          placeholder="Password"
-                          required
-                        />
-
-                        {!isSignupModal && (
-                          <button
-                            type="button"
-                            className="forgot-password"
-                            onClick={() => {
-                              setForgotPassword(true);
-                              setIsSignupModal(false);
-                              setMessage("");
-                              handleForgotPassword();
-                            }}
-                            style={{
-                              marginBottom: "20px",
-                              marginLeft: "130px",
-                              cursor: "pointer",
-                              color: "#007BFF",
-                              backgroundColor: "transparent",
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                              transition: "background-color 0.3s, color 0.3s",
-                              textDecoration: "none",
-                            }}
-                          >
-                            Forgot Password?
-                          </button>
-                        )}
-
-                        <button type="submit">
-                          {isSignupModal ? "Register" : "Login"}
-                        </button>
-                      </>
-                    )}
-                  </form>
-
-                  {!isSignupModal && !forgotPassword && (
-                    <p style={{ marginTop: "15px" }}>
-                      Don't have an account?{" "}
-                      <span
-                        className="signup-link"
-                        onClick={() => {
-                          setIsSignupModal(true);
-                          setForgotPassword(false);
-                          setMessage("");
-                        }}
-                        style={{
-                          cursor: "pointer",
-                          color: "#007BFF",
-                          backgroundColor: "transparent",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          transition: "background-color 0.3s, color 0.3s",
-                          textDecoration: "none",
-                        }}
-                      >
-                        Sign Up
-                      </span>
-                    </p>
-                  )}
-
-                  {isSignupModal && !forgotPassword && (
-                    <p style={{ marginTop: "15px" }}>
-                      Already have an account?{" "}
-                      <span
-                        className="signup-link"
-                        onClick={() => {
-                          setIsSignupModal(false);
-                          setForgotPassword(false);
-                          setMessage("");
-                        }}
-                        style={{
-                          cursor: "pointer",
-                          color: "#007BFF",
-                          backgroundColor: "transparent",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          transition: "background-color 0.3s, color 0.3s",
-                          textDecoration: "none",
-                        }}
-                      >
-                        Login
-                      </span>
-                    </p>
-                  )}
-
-                  {message && (
-                    <div
-                    className="message"
-                    style={{
-                      color: messageType === "error" ? "red" : "green", 
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {message}
-                  </div>
-                  )}
+                {message && (
+                  <div
+                  className="message"
+                  style={{
+                    color: messageType === "error" ? "red" : "green", 
+                    fontWeight: "bold",
+                  }}
+                >
+                  {message}
                 </div>
+                )}
               </div>
-            )}
+            </div>
+          )}
           </div>
           {/* <div className="navbar8-icon-group">
             <svg

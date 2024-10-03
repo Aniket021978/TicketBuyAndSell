@@ -22,7 +22,6 @@ const SuccessMessage = ({ ticket }) => {
           <p><strong>Price:</strong> ${ticket.price || 'N/A'}</p>
           <p><strong>Availability:</strong> {ticket.availability || 'N/A'}</p>
           <p><strong>Location:</strong> {ticket.location || 'N/A'}</p>
-          <p><strong>User ID:</strong> {ticket.userId || 'N/A'}</p> {/* Add userId */}
         </div>
         <Link to="/Live" className="live-now-button" state={ticket}>
           View Your Tickets

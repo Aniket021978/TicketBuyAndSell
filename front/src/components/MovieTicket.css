@@ -1,288 +1,185 @@
-.wrapper {
-  background-color: #f0f4ff; 
-  padding: 90px 0px; 
-  background: linear-gradient(135deg, var(--dl-color-theme-primary2) 10%, var(--dl-color-theme-accent1) 90%);
+.wrapper1 {
+  background: linear-gradient(135deg, #ff6e7f 10%, #bfe9ff 90%);
+  padding: 50px 0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-main {
-  max-width: 600px;
-  margin: auto;
-  border-radius: 8px;
-  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
-  padding: 20px;
-  animation: fadeIn 0.6s ease-out;
+.ticket-box1 {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  overflow: hidden;
+  animation: bounceIn 1s ease forwards;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
-.head {
+.head1 {
   text-align: center;
-  color: white;
-  animation: slideIn 0.5s ease-in-out;
+  color: #333;
   margin-bottom: 20px;
+  font-size: 28px;
 }
 
-@keyframes slideIn {
-  from { transform: translateY(-30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.ticket-form {
+.ticket-form1 {
   display: flex;
   flex-direction: column;
 }
 
-.form-group {
-  margin-bottom: 15px;
-  animation: formGroupFadeIn 0.6s ease-in-out forwards;
+.form-group1 {
+  margin-bottom: 10px;
+  position: relative;
 }
 
-@keyframes formGroupFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.avail{
+  margin-top: 10px;
 }
-
-label {
+.loc{
+  margin-top: 10px;
+}
+.phone{
+  margin-top: -13px;
+}
+.full{
+  margin-top: -13px;
+}
+.label1 {
   font-weight: bold;
-  animation: labelFadeIn 0.5s ease-in-out;
+  margin-bottom: 5px;
+  transition: color 0.3s;
 }
 
-@keyframes labelFadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-input[type="text"],
-input[type="number"],
-textarea {
+.input-readonly1 {
   margin-top: 6px;
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.input-text1,
+.input-number1,
+.textarea1,
+.input-file1 {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   transition: border-color 0.3s, box-shadow 0.3s;
   font-size: 16px;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
-  animation: inputFocus 0.3s ease;
+.input-text1:focus,
+.input-number1:focus,
+.textarea1:focus,
+.input-file1:focus {
+  border-color: #ff6e7f;
+  box-shadow: 0 0 8px rgba(255, 110, 127, 0.5);
 }
-textarea{
+
+.textarea1 {
   height: 50px;
-  border-radius: 10px;
-}
-@keyframes inputFocus {
-  from { transform: scale(1); }
-  to { transform: scale(1.02); }
+  border-radius: 8px;
 }
 
-textarea {
-  resize: vertical;
-}
-
-button {
-  background-color: #4a90e2;
+.button1 {
+  background-color: #ff6e7f;
   color: white;
   padding: 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-  animation: buttonFadeIn 0.5s ease-in-out;
 }
 
-@keyframes buttonFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-button:hover {
-  background-color: #357ab8;
-  transform: translateY(-2px) scale(1.03);
+.button1:hover {
+  background-color: #e75b71;
+  transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.choose-file-button {
-  background-color: #e7e7e7;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 5px;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+.error-message1 {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: shake 0.5s;
 }
 
-.choose-file-button:hover {
-  background-color: #d4d4d4;
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.selected-file-name {
-  margin-top: 5px;
-  font-style: italic;
-  color: #555;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px); }
+  50% { transform: translate(5px); }
+  75% { transform: translate(-5px); }
+  100% { transform: translate(0); }
 }
 
 @media (max-width: 768px) {
-  .wrapper {
-    padding: 80px 0; 
-  }
-
-  main {
-    padding: 15px; 
-  }
-
-  .head {
+  .head1 {
     font-size: 24px; 
-  }
-
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    font-size: 14px; 
-  }
-
-  button {
-    padding: 10px; 
-    font-size: 14px; 
-  }
-
-  .choose-file-button {
-    padding: 10px; 
-    font-size: 14px; 
   }
 }
 
 @media (max-width: 480px) {
-  .wrapper {
-    background-color: #e0e7ff; 
-    padding: 60px 0; 
-    height: 120vh;
-    width: 115%;
-  }
-
-  .head {
+  .head1 {
     font-size: 20px; 
-  }
-
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    font-size: 12px; 
-  }
-
-  button {
-    padding: 8px; 
-    font-size: 12px; 
-  }
-
-  .choose-file-button {
-    padding: 8px; 
-    font-size: 12px; 
   }
 }
-
-@media (min-width: 1024px) {
-  .wrapper {
-    padding: 140px 0; 
-  }
-
-  main {
-    padding: 30px; 
-  }
-
-  .head {
-    font-size: 28px; 
-  }
-
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    font-size: 18px; 
-  }
-
-  button {
-    padding: 14px; 
-    font-size: 16px; 
-  }
-
-  .choose-file-button {
-    padding: 14px; 
-    font-size: 16px; 
-  }
+.phone button {
+  background-color: #ff6e7f;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: -30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
-@media (min-width: 1440px) {
-  .wrapper {
-    padding: 20px 0; 
-  }
-
-  main {
-    padding: 40px; 
-  }
-
-  .head {
-    font-size: 32px; 
-  }
-
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    font-size: 20px; 
-  }
-
-  button {
-    padding: 16px; 
-    font-size: 18px; 
-  }
-
-  .choose-file-button {
-    padding: 16px; 
-    font-size: 18px; 
-  }
+.phone button:hover {
+  background-color: #e75b71;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (min-width: 2560px) {
-  .wrapper {
-    padding: 60px 0; 
-  }
+.otp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
 
-  main {
-    padding: 50px; 
-  }
+.otp input {
+  flex: 1;
+  margin-right: 10px;
+}
 
-  .head {
-    font-size: 36px; 
-  }
+.otp button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
 
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    font-size: 22px; 
-  }
-
-  button {
-    padding: 18px; 
-    font-size: 20px; 
-  }
-
-  .choose-file-button {
-    padding: 18px; 
-    font-size: 20px; 
-  }
+.otp button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }

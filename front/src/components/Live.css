@@ -19,7 +19,7 @@
   top: 2vw;
   right: 5vw;
   padding: 1vw 2vw;
-  background-color: #007bff;
+  background-color: #007bff !important;
   color: white;
   text-decoration: none;
   border-radius: 0.5rem;
@@ -161,6 +161,9 @@
   margin-top: 20px;
 }
 @media (min-width: 330px) and (max-width: 426px) {
+  .live-page{
+    height: auto;
+  }
   .live-title{
     width: 10px;
     margin-left: 40px;
