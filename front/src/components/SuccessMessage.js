@@ -5,7 +5,6 @@ import './SuccessMessage.css';
 const SuccessMessage = ({ ticket }) => {
   console.log('Ticket:', ticket);
 
-  // Use the ticket's image URL directly if it exists, else use a placeholder
   const ticketImage = ticket.image || '';
 
   return (

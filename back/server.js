@@ -14,8 +14,9 @@ const fs = require("fs");
 app.use(
   cors({
     origin: "https://ticket-buy-and-sell-front.vercel.app",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
+    credentials: true,
   })
 );
 app.use(express.json());
