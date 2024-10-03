@@ -12,19 +12,17 @@ const path = require("path");
 const fs = require("fs");
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app'); // Allow the frontend's origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allowed HTTP methods
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allowed headers
-  res.setHeader('Access-Control-Allow-Credentials', true); // Allow credentials (if needed)
-  next();
-});
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Or set a specific origin if required
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ticket-buy-and-sell-front.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.sendStatus(204); // Send a success response with no content
+  // Intercepts OPTIONS method to respond with allowed headers
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
 });
 
 app.use(express.json());
