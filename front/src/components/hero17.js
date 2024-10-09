@@ -23,7 +23,7 @@ const Hero17 = (props) => {
             {props.content1 ?? (
               <Fragment>
                 <p className="hero17-text8 thq-body-large">
-                Discover TickTrade—the effortless way to buy and sell tickets. Whether you’re hunting for the best seats or looking to resell, our secure platform and user-friendly design make it easy. Join TickTrade today and elevate your ticketing experience!.
+                Discover TickNix—the effortless way to buy and sell tickets. Whether you’re hunting for the best seats or looking to resell, our secure platform and user-friendly design make it easy. Join TickTrade today and elevate your ticketing experience!.
                 </p>
               </Fragment>
             )}
