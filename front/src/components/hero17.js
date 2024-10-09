@@ -14,7 +14,7 @@ const Hero17 = (props) => {
             {props.heading1 ?? (
               <Fragment>
                 <h1 className="hero17-text7 thq-heading-1">
-                  Welcome To TickTrade.
+                  Welcome To TickNix.
                 </h1>
               </Fragment>
             )}
