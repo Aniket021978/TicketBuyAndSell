@@ -5,6 +5,7 @@
   align-items: flex-start;
   flex-direction: row;
   padding: 40px 20px;
+  flex-wrap: wrap; 
 }
 
 .contact10-max-width {
@@ -37,57 +38,59 @@
 .contact10-subscribe-section h3 {
   margin-top: 15px;
   margin-bottom: 30px;
-  font-size: 30px;
-  width: 600px;
+  font-size: 2rem; 
+  width: 100%;
 }
 
 .contact10-subscribe-section p {
-  width: 600px;
+  width: 100%;
   margin-bottom: 30px;
-  font-size: 18px;
+  font-size: 1.125rem; 
 }
 
 .contact10-email-input-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 130%;
+  width: 100%;
 }
 
 .contact10-email-input {
-  width: 250px;
+  width: 100%; 
   padding: 10px;
-  margin-right: 10px; 
-  font-size: 17px;
+  margin-right: 10px;
+  font-size: 1rem; 
   font-weight: 600;
   border-radius: 10px;
   color: var(--dl-color-theme-primary2);
   box-sizing: border-box;
 }
-.contact10-email-input-wrapper [type="email"]{
+
+.contact10-email-input-wrapper [type="email"] {
   border: 2px solid var(--dl-color-theme-primary1);
 }
+
 .contact10-subscribe-button {
   margin-bottom: 25px;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 1rem;
   border-radius: 10px;
   float: right;
-  width: 200px;
+  width: 40%;
   height: 45px;
   border: 2px solid var(--dl-color-theme-primary1);
   background-color: white;
   color: var(--dl-color-theme-primary1);
-  font-size: 17px;
   font-weight: 600;
 }
 
 .contact10-right-side {
-  flex: 0.5;
+  flex: 1;
   display: flex;
   justify-content: space-between;
   margin-right: 70px;
   gap: 1px;
+  flex-wrap: wrap; 
 }
 
 .contact10-section {
@@ -99,23 +102,64 @@
 .contact10-section h3,
 .contact10-section a {
   margin: 1px;
-  font-size: 14px;
+  font-size: 1rem; 
 }
-
 @media(max-width: 991px) {
   .contact10-container1 {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px; 
   }
+
+  .contact10-left-side,
   .contact10-right-side {
-    flex-direction: column;
-    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .contact10-right-side {
+    flex-direction: row;
+    justify-content: space-around;
     gap: 20px;
+  }
+
+  .contact10-subscribe-section h3,
+  .contact10-subscribe-section p {
+    text-align: center; 
+    width: 100%;
   }
 }
 
 @media(max-width: 767px) {
+  .contact10-container1 {
+    flex-direction: column;
+    padding: 20px; 
+  }
   .contact10-email-input {
+    width: 100%; 
+  }
+
+  .contact10-subscribe-button {
     width: 100%;
+  }
+
+  .contact10-right-side {
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: 0;
+  }
+}
+
+@media(max-width: 576px) {
+  .contact10-container1 {
+    padding: 15px; 
+  }
+
+  .contact10-subscribe-section h3 {
+    font-size: 1.5rem; 
+  }
+
+  .contact10-subscribe-section p {
+    font-size: 1rem; 
   }
 }
