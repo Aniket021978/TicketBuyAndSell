@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import logo from "../assests/logo.png";
+import logo from "../assests/logo1.png";
 import "./navbar8.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -806,7 +806,13 @@ const Navbar8 = (props) => {
               </a>
               <div className="navbar8-link4-accordion">
                 <div
-                  onClick={() => setLink5AccordionOpen(!link5AccordionOpen)}
+                  onClick={() => {
+                    if (isLoggedIn) {
+                    setLink5DropdownVisible(!link5DropdownVisible);
+                  } else {
+                    setIsModalOpen(true);
+                  }
+                }}
                   className="navbar8-trigger"
                 >
                   <span>
@@ -819,14 +825,14 @@ const Navbar8 = (props) => {
                     )}
                   </span>
                   <div className="navbar8-icon-container2">
-                    {link5AccordionOpen && (
+                    {link5AccordionOpen && isLoggedIn && (
                       <div className="navbar8-container4">
                         <svg viewBox="0 0 1024 1024" className="navbar8-icon18">
                           <path d="M298 426h428l-214 214z"></path>
                         </svg>
                       </div>
                     )}
-                    {!link5AccordionOpen && (
+                    {!link5AccordionOpen && isLoggedIn && (
                       <div className="navbar8-container5">
                         <svg viewBox="0 0 1024 1024" className="navbar8-icon20">
                           <path d="M426 726v-428l214 214z"></path>
