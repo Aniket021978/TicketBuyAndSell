@@ -147,8 +147,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "Your_Email",
-    pass: "Your_Password",
+    user: "aniket021978@gmail.com",
+    pass: "fqqclbomdkgllvgp",
   },
 });
 
@@ -183,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickTrade" Your_Email',
+      from: '"TickNix" <aniket021978@gmail.com>',
       to: email,
       subject: "Your OTP Code",
       html: `
@@ -213,9 +213,9 @@ app.post("/send-otp", async (req, res) => {
       `,
       attachments: [
         {
-          filename: "logo.png",
-          path: path.join(__dirname, "assests", "logo.png"),
-          cid: "ticktrade_logo",
+          filename: "logo1.png",
+          path: path.join(__dirname, "assests", "logo1.png"),
+          cid: "TickNix_logo",
         },
       ],
     });
@@ -409,7 +409,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,  
-    to: 'Your_Email',  
+    to: 'aniket021978@gmail.com',  
     replyTo: email,  
     subject: `New Contact Form Message from ${name}`,
     html: `
@@ -427,9 +427,9 @@ app.post('/send-email', (req, res) => {
     `,
     attachments: [
       {
-        filename: "logo.png",
-        path: path.join(__dirname, "assests", "logo.png"),
-        cid: "ticktrade_logo",
+        filename: "logo1.png",
+        path: path.join(__dirname, "assests", "logo1.png"),
+        cid: "TickNix_logo",
       },
     ],
   };
