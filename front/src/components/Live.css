@@ -179,3 +179,92 @@
   font-size: 18px;
   margin-top: 20px;
 }
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; 
+  margin-left: -10px;
+  width: 100%;
+}
+
+.edit-button,
+.delete-button {
+  background-color: var(--dl-color-theme-primary2);
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px; 
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+}
+.delete-button{
+  width: auto;
+  margin-left: 20px;
+}
+.edit-button:hover {
+  transform: translateY(-2px);
+  background-color: #218838;
+}
+.delete-button:hover {
+  transform: translateY(-2px);
+  background-color: #c82333;
+}
+.modal1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content1 {
+  background: #fff;
+  border-radius: 15px; 
+  padding: 40px;
+  text-align: center;
+  animation: fadeIn 0.3s;
+}
+.modal-content1 h3{
+  margin-bottom: 10px;
+}
+.modal-content1 p{
+  margin-top: 10px;
+}
+.modal-buttons1 {
+  margin-top: 20px;
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button {
+  background-color: var(--dl-color-theme-primary2);
+}
+
+.confirm-button:hover {
+  transform: translateY(-2px);
+  background-color: #c82333;
+}
+
+.cancel-button {
+  background-color: var(--dl-color-theme-primary2);
+  margin-left: 10px;
+}
+
+.cancel-button:hover {
+  transform: translateY(-2px);
+  background-color: #218838;
+}

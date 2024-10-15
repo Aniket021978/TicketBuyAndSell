@@ -14,7 +14,7 @@ const fs = require("fs");
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type"],
   })
 );
@@ -183,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickTrade" <aniket021978@gmail.com>',
+      from: '"TickNix" <aniket021978@gmail.com>',
       to: email,
       subject: "Your OTP Code",
       html: `
@@ -213,9 +213,9 @@ app.post("/send-otp", async (req, res) => {
       `,
       attachments: [
         {
-          filename: "logo.png",
-          path: path.join(__dirname, "assests", "logo.png"),
-          cid: "ticktrade_logo",
+          filename: "logo1.png",
+          path: path.join(__dirname, "assests", "logo1.png"),
+          cid: "TickNix_logo",
         },
       ],
     });
@@ -325,10 +325,14 @@ app.post("/tickets", upload.single("image"), async (req, res) => {
   const image = req.file.filename;
 
   try {
+    const parsedPrice = parseFloat(price);
+  if (isNaN(parsedPrice)) {
+    return res.status(400).json({ message: 'Invalid price' });
+  }
     const newTicket = new Ticket({
       title,
       description,
-      price,
+      parsedPrice,
       availability,
       location,
       image,
@@ -404,6 +408,60 @@ app.get("/tickets/user/:userId", async (req, res) => {
   }
 });
 
+app.put("/tickets/:id", upload.single("image"), async (req, res) => {
+  const { id } = req.params;
+  const { title, description, price, availability, location, phone, address, image } = req.body;
+
+  if (!title || !description || !price || !availability || !location || !phone || !address || !image) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try {
+    const ticket = await Ticket.findById(id);
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket not found" });
+    }
+
+    let image = ticket.image; 
+    if (req.file) {
+      image = req.file.filename; 
+    }
+    ticket.title = title;
+    ticket.description = description;
+    ticket.price = price;
+    ticket.availability = availability;
+    ticket.location = location;
+    ticket.phone = phone;
+    ticket.address = address;
+    ticket.image = image;
+
+    await ticket.save();
+
+    res.status(200).json({ message: "Ticket updated successfully", ticket });
+  } catch (error) {
+    console.error("Error updating ticket:", error);
+    res.status(500).json({ message: "Error updating ticket", error: error.message });
+  }
+});
+
+app.delete("/tickets/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const ticket = await Ticket.findByIdAndDelete(id);
+    
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket not found" });
+    }
+
+    res.status(200).json({ message: "Ticket deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 app.post('/send-email', (req, res) => {
   const { name, email, message } = req.body;
 
@@ -427,9 +485,9 @@ app.post('/send-email', (req, res) => {
     `,
     attachments: [
       {
-        filename: "logo.png",
-        path: path.join(__dirname, "assests", "logo.png"),
-        cid: "ticktrade_logo",
+        filename: "logo1.png",
+        path: path.join(__dirname, "assests", "logo1.png"),
+        cid: "TickNix_logo",
       },
     ],
   };

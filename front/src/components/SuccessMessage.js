@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './SuccessMessage.css';
 
-const SuccessMessage = ({ ticket }) => {
+const SuccessMessage = ({ ticket,isUpdate }) => {
   console.log('Ticket:', ticket);
 
   const ticketImage = ticket.image || '';
@@ -10,7 +10,7 @@ const SuccessMessage = ({ ticket }) => {
   return (
     <div className="success-message">
       <div className="tick-icon">&#10003;</div>
-      <h2>Your Ticket is Live Now!</h2>
+      <h2>{isUpdate ? 'Your Ticket is Updated!' : 'Your Ticket is Live Now!'}</h2>
       <div className="ticket-details">
         {ticketImage && (
           <img src={ticketImage} alt={ticket.title || 'Ticket Image'} className="ticket-image" />
@@ -18,7 +18,7 @@ const SuccessMessage = ({ ticket }) => {
         <div className="ticket-info">
           <p><strong>Title:</strong> {ticket.title || 'N/A'}</p>
           <p><strong>Description:</strong> {ticket.description || 'N/A'}</p>
-          <p><strong>Price:</strong> ${ticket.price || 'N/A'}</p>
+          <p><strong>Price:</strong> ₹{ticket.price || 'N/A'}</p>
           <p><strong>Availability:</strong> {ticket.availability || 'N/A'}</p>
           <p><strong>Location:</strong> {ticket.location || 'N/A'}</p>
         </div>

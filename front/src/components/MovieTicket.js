@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import SuccessMessage from './SuccessMessage';
 import './MovieTicket.css';
 
-const MovieTicket = () => {
+const ConcertTicket = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [availability, setAvailability] = useState('');
-  const [location, setLocation] = useState('');
+  const [YourLocation, setYourLocation] = useState('');
   const [image, setImage] = useState(null);
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [ticketSaved, setTicketSaved] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageName, setImageName] = useState('');
+
+  const location = useLocation();
+  const ticket = location.state?.ticket;
+
+  useEffect(() => {
+    if (ticket) {
+      setDescription(ticket.description);
+      setPrice(ticket.price);
+      setAvailability(ticket.availability);
+      setYourLocation(ticket.location);
+      setPhone(ticket.phone);
+      setAddress(ticket.address);
+      setImage(ticket.image);
+      setImageName(ticket.image.split('/').pop());
+    }
+  }, [ticket]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -21,7 +39,10 @@ const MovieTicket = () => {
         return;
       }
       setImage(file);
+      setImageName(file.name);
       setErrorMessage('');
+    } else {
+      setImageName('');
     }
   };
 
@@ -35,7 +56,7 @@ const MovieTicket = () => {
   const handleLocationChange = (e) => {
     const value = e.target.value;
     if (/^[a-zA-Z].*/.test(value) || value === '') {
-      setLocation(value);
+      setYourLocation(value);
     }
   };
 
@@ -43,21 +64,36 @@ const MovieTicket = () => {
     e.preventDefault();
     const formData = new FormData();
     const userId = localStorage.getItem('userId');
+
+    if (!description || !price || !availability || !YourLocation || !phone || !address) {
+      setErrorMessage('Please fill out all fields.');
+      return;
+    }
+
+    if (!image && !ticket) {
+      setErrorMessage('Please upload an image or keep the existing one.');
+      return;
+    }
+
     formData.append('title', 'Movie');
     formData.append('description', description);
     formData.append('price', price);
     formData.append('availability', availability);
-    formData.append('location', location);
+    formData.append('location', YourLocation);
     formData.append('image', image);
     formData.append('phone', phone);
     formData.append('address', address);
     formData.append('userId', userId);
 
     try {
-      const response = await fetch('http://localhost:5000/tickets', {
-        method: 'POST',
+      const url = ticket ? `http://localhost:5000/tickets/${ticket._id}` : 'http://localhost:5000/tickets';
+      const method = ticket ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         body: formData,
       });
+      console.log('Response status:', response.status);
       if (response.ok) {
         const result = await response.json();
         console.log('Ticket saved:', result);
@@ -80,8 +116,8 @@ const MovieTicket = () => {
           description,
           price,
           availability,
-          location,
-          image: image ? URL.createObjectURL(image) : '',
+          location: YourLocation,
+          image: image instanceof File ? URL.createObjectURL(image) : (image ? image : ''),
           phone,
           address,
         }}
@@ -91,8 +127,8 @@ const MovieTicket = () => {
 
   return (
     <div className="wrapper1">
-      <main className="ticket-box1">
-        <h1 className='head1'>Sell Your Movie Ticket</h1>
+      <main className='ticket-box1'>
+        <h1 className='head1'>{ticket ? 'Edit Movie Ticket' : 'Sell Your Movie Ticket'}</h1>
         <form className="ticket-form1" onSubmit={handleSubmit} encType="multipart/form-data">
           {errorMessage && <p className="error-message1">{errorMessage}</p>}
           <div className="form-group1">
@@ -131,13 +167,13 @@ const MovieTicket = () => {
               type="text"
               id="location"
               className="input-text1"
-              value={location}
+              value={YourLocation}
               onChange={handleLocationChange}
               required
             />
           </div>
           <div className="form-group1 phone">
-            <label htmlFor="phone" className="label1">Enter Correct Phone Number So That Buyer Contact you:</label>
+            <label htmlFor="phone" className="label1">Phone Number:</label>
             <input
               type="text"
               id="phone"
@@ -149,7 +185,7 @@ const MovieTicket = () => {
             />
           </div>
           <div className="form-group1 full">
-            <label htmlFor="address" className="label1">Enter Correct Full Address So That Buyer Contact you:</label>
+            <label htmlFor="address" className="label1">Full Address:</label>
             <textarea
               id="address"
               className="textarea1"
@@ -160,13 +196,14 @@ const MovieTicket = () => {
           </div>
           <div className="form-group1">
             <label htmlFor="image" className="label1">Upload Image:</label>
-            <input type="file" id="image" accept="image/*" className="input-file1" onChange={handleImageChange} required />
+            <input type="file" id="image" accept="image/*" className="input-file1" onChange={handleImageChange} />
+            <span>{imageName}</span>
           </div>
-          <button type="submit" className="button1">Submit Ticket</button>
+          <button type="submit" className="button1">{ticket ? 'Update Ticket' : 'Submit Ticket'}</button>
         </form>
       </main>
     </div>
   );
 };
 
-export default MovieTicket;
+export default ConcertTicket;
