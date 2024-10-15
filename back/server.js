@@ -20,7 +20,7 @@ app.use(
 );
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/TickTrade", {
+mongoose.connect("mongodb://127.0.0.1:27017/TickNix", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -147,8 +147,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "aniket021978@gmail.com",
-    pass: "fqqclbomdkgllvgp",
+    user: "your_email",
+    pass: "your_pass",
   },
 });
 
@@ -183,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickNix" <aniket021978@gmail.com>',
+      from: '"TickNix" <"your_email">',
       to: email,
       subject: "Your OTP Code",
       html: `
@@ -467,7 +467,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,  
-    to: 'aniket021978@gmail.com',  
+    to: 'user-address',  
     replyTo: email,  
     subject: `New Contact Form Message from ${name}`,
     html: `
