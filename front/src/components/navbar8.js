@@ -38,7 +38,6 @@ const Navbar8 = (props) => {
       console.log("CTA26 section not found.");
     }
   };
-
   const handleOtpChange = (index, value) => {
     if (/^\d*$/.test(value) && value.length <= 1) {
       const newOtp = [...otp];
@@ -786,6 +785,8 @@ const Navbar8 = (props) => {
                   e.preventDefault();
                   if (isLoggedIn) {
                     scrollToCTA();
+                    setIsModalOpen(false); 
+                    setIsMenuOpen(false);  
                   } else {
                     setPendingScroll(true);
                     setIsModalOpen(true);
@@ -809,6 +810,7 @@ const Navbar8 = (props) => {
                   onClick={() => {
                     if (isLoggedIn) {
                     setLink5DropdownVisible(!link5DropdownVisible);
+                    setLink5AccordionOpen(!link5AccordionOpen);
                   } else {
                     setIsModalOpen(true);
                   }
