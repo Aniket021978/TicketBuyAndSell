@@ -14,7 +14,7 @@ const UserTickets = () => {
 
   const fetchUserTickets = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/tickets/user/${userId}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/tickets/user/${userId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch tickets');
       }
@@ -45,7 +45,7 @@ const UserTickets = () => {
   const handleDelete = async () => {
     if (ticketToDelete) {
       try {
-        const response = await fetch(`http://localhost:5000/tickets/${ticketToDelete._id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/tickets/${ticketToDelete._id}`, {
           method: 'DELETE',
         });
         if (!response.ok) {
