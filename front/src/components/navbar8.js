@@ -92,12 +92,12 @@ const Navbar8 = (props) => {
       setLoading(true);
 
       const verifyEmailResponse = await axios.post(
-        `http://localhost:5000/verify-email`,
+        `${process.env.REACT_APP_API_URL}/verify-email`,
         { email }
       );
       if (verifyEmailResponse.data.isRegistered) {
         const sendOtpResponse = await axios.post(
-          `http://localhost:5000/send-otp`,
+          `${process.env.REACT_APP_API_URL}/send-otp`,
           { email }
         );
         if (sendOtpResponse.data.success) {
@@ -126,7 +126,7 @@ const Navbar8 = (props) => {
 
   const handleVerifyOtp = async (email, enteredOtp) => {
     try {
-      const response = await axios.post("http://localhost:5000/verify-otp", {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/verify-otp`, {
         email,
         otp: enteredOtp,
       });
@@ -148,7 +148,7 @@ const Navbar8 = (props) => {
   const handleResetPassword = async (email, newPassword) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/reset-password",
+        `${process.env.REACT_APP_API_URL}/reset-password`,
         {
           email,
           newPassword,
@@ -195,7 +195,7 @@ const Navbar8 = (props) => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -229,7 +229,7 @@ const Navbar8 = (props) => {
   const checkUsernameAvailability = async (username) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/check-username?username=${username}`
+        `${process.env.REACT_APP_API_URL}/check-username?username=${username}`
       );
       const data = await response.json();
 
@@ -259,7 +259,7 @@ const Navbar8 = (props) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
