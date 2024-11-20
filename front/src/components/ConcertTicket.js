@@ -88,7 +88,7 @@ const ConcertTicket = () => {
     formData.append('userId', userId);
 
     try {
-      const url = ticket ? `http://localhost:5000/tickets/${ticket._id}` : 'http://localhost:5000/tickets';
+      const url = ticket ? `${process.env.REACT_APP_API_URL}/tickets/${ticket._id}` : `${process.env.REACT_APP_API_URL}/tickets`;
       const method = ticket ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
