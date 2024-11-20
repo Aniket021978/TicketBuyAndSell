@@ -758,7 +758,7 @@ const Navbar8 = (props) => {
         >
           <div className="navbar8-nav">
             <div className="navbar8-top">
-              <img alt={props.logoAlt} src={logoSrc} className="navbar8-logo" />
+              <img alt={props.logoAlt} src={logoSrc} className="navbar8-image1" />
               <div
                 data-thq="thq-close-menu"
                 className="navbar8-close-menu"
