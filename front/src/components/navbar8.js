@@ -74,7 +74,7 @@ const Navbar8 = (props) => {
       timer = setInterval(() => {
         setOtpTimer((prev) => prev - 1);
       }, 1000);
-    } else if (otpTimer === 0) {
+    } else if (otpTimer === 0 && isModalOpen && forgotPassword && isOtpSent && !isOtpVerified) {
       setMessage("Your time is up! Please send the OTP again.");
       setMessageType("error");
       setIsOtpSent(false);
@@ -84,7 +84,7 @@ const Navbar8 = (props) => {
     }
 
     return () => clearInterval(timer);
-  }, [timerActive, otpTimer,isModalOpen]);
+  }, [timerActive, otpTimer, isModalOpen, forgotPassword, isOtpSent, isOtpVerified]);
 
   const handleGetOtp = async (email) => {
     try {
