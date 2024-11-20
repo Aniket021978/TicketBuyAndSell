@@ -328,7 +328,7 @@ app.post("/tickets", upload.single("image"), async (req, res) => {
     const newTicket = new Ticket({
       title,
       description,
-      parsedPrice,
+      price: parsedPrice,
       availability,
       location,
       image,
