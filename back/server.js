@@ -12,11 +12,7 @@ const path = require("path");
 const fs = require("fs");
 
 app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
+  cors()
 );
 app.use(express.json());
 
