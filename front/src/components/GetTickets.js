@@ -137,9 +137,9 @@ const GetTickets = () => {
               </div>
             ))
           ) : (category || priceRange || area) ? (
-            <p className="para">No tickets found with the selected filters.</p>
+            <p className="no-tickets-message">No tickets found with the selected filters.</p>
           ) : (
-            <p className="para">No tickets are live yet.</p>
+            <p className="no-tickets-message">No tickets are live yet.</p>
           )
         )}
       </div>
