@@ -7,7 +7,7 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   animation: fadeIn 1s ease-in-out;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .get-tickets-container h2 {
