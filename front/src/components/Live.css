@@ -1,7 +1,7 @@
 .live-page {
   padding: 5vw;
   background: linear-gradient(135deg, var(--dl-color-theme-primary2) 10%, var( --dl-color-theme-accent1) 90%);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .live-title {
