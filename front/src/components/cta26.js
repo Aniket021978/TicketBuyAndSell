@@ -8,7 +8,7 @@ const CTA26 = forwardRef((props, ref) => {
   const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate('/GetTickets'); 
+    window.scrollTo(0, 0);
   };
   useEffect(() => {
     window.scrollTo(0, 0);
