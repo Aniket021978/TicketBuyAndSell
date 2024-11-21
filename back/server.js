@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -10,16 +11,19 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-require('dotenv').config();
 app.use(
-  cors()
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST","PUT","DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
 );
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.log('MongoDB connection error:', err));
+
 
 const UPLOADS_DIR = path.join(__dirname, "uploads");
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -179,7 +183,7 @@ app.post("/send-otp", async (req, res) => {
     const token = jwt.sign({ otp }, JWT_SECRET, { expiresIn: "10m" });
 
     await transporter.sendMail({
-      from: '"TickNix" <"your_email">',
+      from: '"TickNix" <aniket021978@gmail.com>',
       to: email,
       subject: "Your OTP Code",
       html: `
@@ -463,7 +467,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,  
-    to: 'user-address',  
+    to: 'aniket021978@gmail.com',  
     replyTo: email,  
     subject: `New Contact Form Message from ${name}`,
     html: `
