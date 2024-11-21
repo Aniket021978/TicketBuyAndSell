@@ -316,7 +316,6 @@ const Navbar8 = (props) => {
   const handleSportClick = () => {
     navigate("/SportsTicket");
   };
-
   return (
     <header className="navbar8-container1">
       <header data-thq="thq-navbar" className="navbar8-navbar-interactive">
@@ -339,7 +338,7 @@ const Navbar8 = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (isLoggedIn) {
-                  scrollToCTA();
+                  navigate('./GetTickets');
                 } else {
                   setPendingScroll(true);
                   setIsModalOpen(true);
@@ -496,7 +495,7 @@ const Navbar8 = (props) => {
           {isModalOpen && (
             <div className={`modal-fullscreen ${isModalOpen ? "active" : ""}`}>
               <div className="modal-content">
-                <button className="close" onClick={() => setIsModalOpen(false)}>
+                <button className="close" onClick={() => {setIsModalOpen(false); setTimerActive(false);}}>
                   &times;
                 </button>
                 <h2>
@@ -527,7 +526,6 @@ const Navbar8 = (props) => {
                         email,
                         enteredOtp
                       );
-
                       if (isVerified) {
                         setIsOtpVerified(true);
                         setTimerActive(false);
@@ -784,7 +782,7 @@ const Navbar8 = (props) => {
                 onClick={(e) => {
                   e.preventDefault();
                   if (isLoggedIn) {
-                    scrollToCTA();
+                    navigate('./GetTickets');
                     setIsModalOpen(false); 
                     setIsMenuOpen(false);  
                   } else {
