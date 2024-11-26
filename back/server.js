@@ -469,7 +469,7 @@ app.post('/send-email', (req, res) => {
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
         <div style="text-align: center;">
-          <img src="cid:ticktrade_logo" alt="Logo" style="width: 150px; height: auto;"/>
+          <img src="cid:TickNix_logo" alt="Logo" style="width: 150px; height: auto;"/>
         </div>
         <h2 style="color: #333;">New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
