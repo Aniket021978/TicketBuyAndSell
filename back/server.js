@@ -12,11 +12,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST","PUT","DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
+  cors()
 );
 app.use(express.json());
 
@@ -467,7 +463,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,  
-    to: 'aniket021978@gmail.com',  
+    to: process.env.EMAIL_USER,  
     replyTo: email,  
     subject: `New Contact Form Message from ${name}`,
     html: `
